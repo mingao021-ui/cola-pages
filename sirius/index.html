@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirius 高敏</title>
+<style>
+  :root {
+    --deep-blue: #1B3A5C;
+    --gold: #D4A853;
+    --ivory: #FAF7F2;
+    --text: #2C2C2C;
+    --text-light: #5A5A5A;
+    --border: #E8E3DC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--ivory);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .name {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--deep-blue);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .tagline {
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+
+  /* Section */
+  section { margin-bottom: 48px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+
+  /* Story */
+  .story p {
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+
+  .story p:last-child { margin-bottom: 0; }
+
+  /* Identity */
+  .identity-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .identity-list li {
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--deep-blue);
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  /* What I Do */
+  .do-list {
+    list-style: none;
+  }
+
+  .do-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: var(--text-light);
+  }
+
+  .do-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* Belief */
+  .belief {
+    background: var(--deep-blue);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .belief .quote-mark {
+    color: var(--gold);
+    font-size: 20px;
+    margin-right: 4px;
+  }
+
+  /* Links */
+  .links {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .link-item {
+    color: var(--deep-blue);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .link-item:hover { color: var(--gold); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 12px;
+    color: #B0A99F;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 48px 20px 40px; }
+    .name { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1 class="name">Sirius 高敏</h1>
+    <p class="tagline">英语老师的 IP 打造者</p>
+    <div class="divider"></div>
+  </header>
+
+  <section class="story">
+    <div class="section-title">· 来路 ·</div>
+    <p>
+      硕士毕业于爱丁堡大学语言教育方向，拿了 Distinction。毕业论文导师是 Do Coyle 教授——那是我人生中第一次鼓起勇气，走向一个让我仰望的人。她答应了。后来教授 Constant Leung 面试我进 KCL — 他恰好认识 Do Coyle。回头看，那些鼓起勇气的瞬间，串成了今天的路。
+    </p>
+    <p>
+      Gap year 那年做过五份工作、错了四次方向，但没白错。我拿到了 KCL 语言学博士录取，同时跑通了一人公司的商业闭环。现在一个人同时推三条线：博士研究、独立雅思教练、个人品牌创业。累是真累，但回头看，每一次都又跑了一段。
+    </p>
+  </section>
+
+  <section>
+    <div class="section-title">· 身份 ·</div>
+    <ul class="identity-list">
+      <li>KCL 语言学博士将读</li>
+      <li>爱丁堡大学语言教育硕士（Distinction）</li>
+      <li>独立雅思教练</li>
+      <li>一人公司创业者</li>
+      <li>生命教练修习者</li>
+      <li>内容创作者</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-title">· 在做的事 ·</div>
+    <ul class="do-list">
+      <li>雅思三个月陪跑 — 不只是出分，是陪你建立能闯世界的内核</li>
+      <li>1v1 英语诊断 — 听说读写四维定位，找到你真正的弱项</li>
+      <li>内容创作 — 公众号 & 短视频日更，写英语、创业、成长</li>
+      <li>留学规划咨询 — 湖北师范大学招就处海外留学办公室</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="belief">
+      <span class="quote-mark">“</span>英语不只是一门考试。它是你打开人生边界的钥匙。我帮的不是你的分数——是你敢不敢用英语去闯那个你想要的世界。
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">· 找到我 ·</div>
+    <div class="links">
+      <span class="link-item">公众号：Sirius闯世界</span>
+      <span class="link-item">小红书：Sirius闯世界</span>
+      <span class="link-item">微信：HelloSirius2025</span>
+    </div>
+  </section>
+
+  <footer>
+    2026 · Sirius Gao · 在武汉和伦敦之间
+  </footer>
+
+</div>
+</body>
+</html>
