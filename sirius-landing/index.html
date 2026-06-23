@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirius闯世界 | 用英语帮你设计不用坐班的海外人生</title>
+    <style>
+        /* QR Modal */
+        .qr-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+        .qr-overlay.active {
+            display: flex;
+        }
+        .qr-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            max-width: 340px;
+            width: 90%;
+        }
+        .qr-box h3 {
+            font-size: 18px;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        .qr-box p {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        .qr-box img {
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .qr-box .close-hint {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #bbb;
+            cursor: pointer;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: #2c2c2c;
+            line-height: 1.8;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero .brand {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .hero .sub {
+            font-size: 16px;
+            opacity: 0.85;
+            line-height: 1.8;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        section {
+            padding: 56px 0;
+        }
+
+        section:nth-child(even) {
+            background: #fff;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a1a2e;
+        }
+
+        .section-title span {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            color: #999;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        /* Pain Points */
+        .pain-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .pain-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e8d5b7, #d4a574);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .pain-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a1a2e;
+        }
+
+        .pain-text p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Insight */
+        .insight-box {
+            background: linear-gradient(135deg, #fdf6ec, #fef9f3);
+            border-left: 4px solid #d4a574;
+            border-radius: 0 12px 12px 0;
+            padding: 28px 24px;
+            margin: 0 auto;
+            max-width: 560px;
+            font-size: 16px;
+            line-height: 1.9;
+            color: #4a3728;
+            text-align: center;
+        }
+
+        /* About */
+        .about-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 36px 28px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .about-card .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+
+        .about-card .name {
+            color: #d4a574;
+        }
+
+        .about-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .about-card .tag {
+            background: #f5f0eb;
+            color: #8b6f4e;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .about-card p {
+            font-size: 15px;
+            color: #555;
+            margin-top: 12px;
+        }
+
+        /* Gains */
+        .gain-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: flex-start;
+        }
+
+        .gain-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            color: #d4a574;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .gain-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1a1a2e;
+        }
+
+        .gain-text p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Service */
+        .service-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .service-card .detail {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .service-card .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d4a574;
+            margin: 20px 0;
+        }
+
+        .service-card .price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #999;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 64px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-section h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 32px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4a574, #c4956a);
+            color: #fff;
+            padding: 16px 48px;
+            border-radius: 32px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(212,165,116,0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(212,165,116,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 32px 0;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero { padding: 60px 0 48px; }
+            .hero h1 { font-size: 24px; }
+            .pain-card { padding: 20px 18px; }
+            .about-card { padding: 28px 20px; }
+            section { padding: 40px 0; }
+            .cta-section { padding: 48px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="container">
+        <div class="brand">Sirius Coaching</div>
+        <h1>用英语帮你设计<br>不用坐班的海外人生</h1>
+        <p class="sub">你不需要拥有所有答案，只需要愿意开始探索</p>
+    </div>
+</div>
+
+<!-- Pain Points -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <span>送给这样的你</span>
+            你是不是也在压抑着什么？
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-num">01</div>
+            <div class="pain-text">
+                <h3>压抑了真实的情绪</h3>
+                <p>不敢生气、不敢表达不满、不敢说不</p>
+            </div>
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-num">02</div>
+            <div class="pain-text">
+                <h3>压抑了真实的欲望</h3>
+                <p>想休息、想辞职、想追求梦想，但怕被说是"不务正业"</p>
+            </div>
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-num">03</div>
+            <div class="pain-text">
+                <h3>压抑了真实的自我</h3>
+                <p>觉得自己"不够好""不够努力""不够成功"，但其实已经很努力了</p>
+            </div>
+        </div>
+
+        <div class="pain-card">
+            <div class="pain-num">04</div>
+            <div class="pain-text">
+                <h3>压抑了脆弱</h3>
+                <p>从小被教育"要坚强""要独立"，所以不敢展示脆弱的一面</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Insight -->
+<section>
+    <div class="container">
+        <div class="insight-box">
+            你需要的不是更努力，<br>
+            而是更清晰地了解自己，<br>
+            真正看见自己内心深处的渴望和创造的可能性
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <span>关于我</span>
+            你好，我是 Sirius 高敏
+        </div>
+
+        <div class="about-card">
+            <p class="greeting">Hi，我是 <span class="name">Sirius 闯世界</span></p>
+            <div class="tags">
+                <span class="tag">KCL 在读博士</span>
+                <span class="tag">爱丁堡硕士</span>
+                <span class="tag">Life Coach</span>
+                <span class="tag">数字游民</span>
+            </div>
+            <p>每天工作4小时，非技术背景跑通一人公司商业闭环。</p>
+            <p>我曾经也在迷茫、焦虑和自我怀疑中徘徊，直到我开始向内探索，理解自己，接纳自己，才真正找回了内在的力量与方向。</p>
+            <p>现在，我想陪伴更多人一起走这段旅程：看见真实的自己，释放内在的限制，活出更自由、更有意义的人生。</p>
+        </div>
+    </div>
+</section>
+
+<!-- Gains -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <span>教练对话</span>
+            你会收获什么
+        </div>
+
+        <div class="gain-item">
+            <div class="gain-num">01</div>
+            <div class="gain-text">
+                <h3>被理解的安全感</h3>
+                <p>在这里，你不需要伪装，可以承认自己的脆弱和恐惧</p>
+            </div>
+        </div>
+
+        <div class="gain-item">
+            <div class="gain-num">02</div>
+            <div class="gain-text">
+                <h3>打破孤独的连接感</h3>
+                <p>发现自己不是异类，世界上还有很多"和自己一样的人"</p>
+            </div>
+        </div>
+
+        <div class="gain-item">
+            <div class="gain-num">03</div>
+            <div class="gain-text">
+                <h3>行动起来的勇气</h3>
+                <p>不是因为被打了鸡血，而是因为看到一条具体的、可行的路</p>
+            </div>
+        </div>
+
+        <div class="gain-item">
+            <div class="gain-num">04</div>
+            <div class="gain-text">
+                <h3>做自己的合法性</h3>
+                <p>在这里，"做自己"不再是一种自私或任性的选择，而是一种理直气壮的生活态度</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <span>服务形式</span>
+            预约教练对话
+        </div>
+
+        <div class="service-card">
+            <h3>线上 1v1 教练对话</h3>
+            <p class="detail">每次 60 分钟 · 线上会议</p>
+            <p class="detail">保密 · 尊重 · 非评判的安全空间</p>
+            <p class="detail">聚焦你的目标与成长，激发内在潜能</p>
+            <div class="price">¥199 <span>/ 次</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+    <div class="container">
+        <h2>准备好了吗？</h2>
+        <p>扫码或私信，预约你的第一次对话</p>
+        <a href="javascript:void(0)" class="cta-btn" onclick="document.getElementById('qrModal').classList.add('active')">预约对话</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>© 2026 Sirius闯世界 · 用生命照亮生命</p>
+    </div>
+</footer>
+
+<!-- QR Code Modal -->
+<div class="qr-overlay" id="qrModal" onclick="this.classList.remove('active')">
+    <div class="qr-box" onclick="event.stopPropagation()">
+        <h3>扫码预约教练对话</h3>
+        <p>长按识别二维码 · 添加 Sirius 微信</p>
+        <img src="qr.jpg" alt="Sirius 微信二维码">
+        <div class="close-hint">点击空白处关闭</div>
+    </div>
+</div>
+
+</body>
+</html>
