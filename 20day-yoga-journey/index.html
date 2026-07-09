@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20个体式，一段身心旅程</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: linear-gradient(180deg, #fef9f0 0%, #fdf2f8 30%, #f0f4ff 60%, #f5fdf6 100%);
+    color: #3a3045;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; left: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(255,182,193,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatA 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(173,216,230,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatB 10s ease-in-out infinite;
+  }
+  @keyframes floatA { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-20px) scale(1.08)} }
+  @keyframes floatB { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-15px,15px) scale(1.06)} }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
+    color: #fff; padding: 6px 20px; border-radius: 50px;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+    background: linear-gradient(135deg, #e879a0, #8b7ec8, #60a5c8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .hero .subtitle { font-size: 1.1rem; color: #8b7fa8; position: relative; z-index: 1; }
+
+  /* ── Progress ── */
+  .progress-wrap { max-width: 1100px; margin: 60px auto 40px; padding: 0 24px; }
+  .progress-bar { display: flex; height: 8px; border-radius: 8px; overflow: hidden; background: #f0ecf5; }
+  .progress-seg { flex: 1; }
+  .progress-seg:nth-child(1) { background: #c4cfe8; }
+  .progress-seg:nth-child(2) { background: #f4c4bc; }
+  .progress-seg:nth-child(3) { background: #f2d89b; }
+  .progress-seg:nth-child(4) { background: #e4b8dd; }
+  .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.72rem; color: #9a91a8; }
+
+  /* ── Stage ── */
+  .stage { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+  .stage-header { text-align: center; margin-bottom: 36px; }
+  .stage-num { font-size: 0.8rem; letter-spacing: 0.12em; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .stage-title { font-family: 'Noto Serif SC', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 4px; }
+  .stage-sub { font-size: 0.95rem; opacity: 0.7; }
+
+  .stage--aware  .stage-num { color: #7c8cc0; } .stage--aware  .stage-title { color: #5b6aae; }
+  .stage--release .stage-num { color: #e8978a; } .stage--release .stage-title { color: #d4746a; }
+  .stage--rebuild .stage-num { color: #d4a44c; } .stage--rebuild .stage-title { color: #c49038; }
+  .stage--bloom .stage-num { color: #c47eb8; } .stage--bloom .stage-title { color: #ad5c9e; }
+
+  /* ── Cards Grid ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+  @media (min-width: 1000px) { .cards { grid-template-columns: repeat(5, 1fr); } }
+
+  .card {
+    background: #fff; border-radius: 18px; padding: 22px 18px 18px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer; border: none; width: 100%; text-align: left;
+    font-family: inherit;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+  .card-accent { position: absolute; top:0; left:0; right:0; height:4px; border-radius:18px 18px 0 0; }
+  .stage--aware  .card-accent { background: linear-gradient(90deg, #c4cfe8, #a8b8e0); }
+  .stage--release .card-accent { background: linear-gradient(90deg, #f4c4bc, #f0a89b); }
+  .stage--rebuild .card-accent { background: linear-gradient(90deg, #f2d89b, #ecc86a); }
+  .stage--bloom .card-accent { background: linear-gradient(90deg, #e4b8dd, #d89ccd); }
+  .card-day { font-size:0.7rem; font-weight:700; letter-spacing:.08em; margin-bottom:10px; }
+  .stage--aware  .card-day { color: #7c8cc0; }
+  .stage--release .card-day { color: #d4746a; }
+  .stage--rebuild .card-day { color: #c49038; }
+  .stage--bloom .card-day { color: #ad5c9e; }
+  .card-pose-name { font-family:'Noto Serif SC',serif; font-size:1.05rem; font-weight:700; color:#3a3045; margin-bottom:4px; line-height:1.4; }
+  .card-sanskrit { font-size:0.72rem; color:#aaa; font-style:italic; margin-bottom:12px; }
+  .card-insight { font-size:0.82rem; color:#6a6478; line-height:1.65; padding-left:12px; border-left:2px solid #e8e4f0; }
+  .card-hint { font-size:0.68rem; color:#c0b8d0; margin-top:10px; text-align:right; }
+
+  /* ── Modal Overlay ── */
+  .modal-overlay {
+    position: fixed; inset:0; background: rgba(30,24,42,0.55);
+    z-index:1000; display:flex; align-items:center; justify-content:center;
+    padding:20px; opacity:0; pointer-events:none;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.active { opacity:1; pointer-events:auto; }
+
+  .modal {
+    background:#fff; border-radius:24px; max-width:600px; width:100%;
+    max-height:90vh; overflow-y:auto; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.15);
+    animation: modalIn 0.35s ease;
+  }
+  @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+  .modal-close {
+    position:sticky; top:16px; float:right; z-index:10;
+    width:36px;height:36px; border-radius:50%; border:none;
+    background:#f3f0f8; color:#8b7fa8; font-size:1.2rem;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    margin-right:16px; transition:background 0.2s;
+  }
+  .modal-close:hover { background:#e8e4f2; }
+
+  .modal-body { padding: 10px 32px 36px; }
+
+  .modal-day-badge {
+    display:inline-block; padding:4px 14px; border-radius:50px;
+    font-size:0.75rem; font-weight:700; letter-spacing:.08em;
+    margin-bottom:6px; color:#fff;
+  }
+  .modal--aware  .modal-day-badge { background:#7c8cc0; }
+  .modal--release .modal-day-badge { background:#d4746a; }
+  .modal--rebuild .modal-day-badge { background:#c49038; }
+  .modal--bloom .modal-day-badge { background:#ad5c9e; }
+
+  .modal-pose-name { font-family:'Noto Serif SC',serif; font-size:1.5rem; font-weight:700; margin:8px 0 2px; }
+  .modal-sanskrit { font-size:0.85rem; color:#aaa; font-style:italic; margin-bottom:4px; }
+
+  .modal-svg-wrap {
+    margin:20px 0; text-align:center; padding:32px 20px;
+    border-radius:20px;
+  }
+  .modal--aware  .modal-svg-wrap { background:linear-gradient(135deg,#eef1fa,#e2e8f6); }
+  .modal--release .modal-svg-wrap { background:linear-gradient(135deg,#fef3f1,#fde8e5); }
+  .modal--rebuild .modal-svg-wrap { background:linear-gradient(135deg,#fef9ee,#fdf2db); }
+  .modal--bloom .modal-svg-wrap { background:linear-gradient(135deg,#faf2f8,#f5e6f2); }
+
+  .modal-svg-wrap svg { max-width:200px; }
+
+  .modal-section { margin-top:20px; }
+  .modal-section h3 {
+    font-family:'Noto Serif SC',serif; font-size:1rem; font-weight:700;
+    margin-bottom:8px; display:flex; align-items:center; gap:8px;
+  }
+  .modal-section h3::before { content:''; width:4px; height:18px; border-radius:2px; display:inline-block; }
+  .modal--aware  .modal-section h3::before { background:#7c8cc0; }
+  .modal--release .modal-section h3::before { background:#d4746a; }
+  .modal--rebuild .modal-section h3::before { background:#c49038; }
+  .modal--bloom .modal-section h3::before { background:#ad5c9e; }
+
+  .modal-section p, .modal-section li { font-size:0.9rem; color:#5e5668; line-height:1.8; }
+  .modal-section ul { list-style:none; padding:0; }
+  .modal-section li { padding:6px 0; padding-left:20px; position:relative; }
+  .modal-section li::before { content:'•'; position:absolute; left:4px; }
+  .modal--aware  .modal-section li::before { color:#7c8cc0; }
+  .modal--release .modal-section li::before { color:#d4746a; }
+  .modal--rebuild .modal-section li::before { color:#c49038; }
+  .modal--bloom .modal-section li::before { color:#ad5c9e; }
+
+  .modal-insight-box {
+    margin-top:20px; padding:16px 20px; border-radius:14px;
+    font-size:0.9rem; line-height:1.7; color:#5e5668;
+  }
+  .modal--aware  .modal-insight-box { background:#f4f6fc; border-left:3px solid #7c8cc0; }
+  .modal--release .modal-insight-box { background:#fef6f5; border-left:3px solid #d4746a; }
+  .modal--rebuild .modal-insight-box { background:#fffcf5; border-left:3px solid #c49038; }
+  .modal--bloom .modal-insight-box { background:#fdf7fb; border-left:3px solid #ad5c9e; }
+
+  /* ── Footer ── */
+  .footer { text-align:center; padding:50px 24px 40px; color:#b8aec8; font-size:0.85rem; }
+  .footer .cta {
+    display:inline-block; margin-top:16px;
+    background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
+    color:#fff; padding:12px 36px; border-radius:50px;
+    font-weight:600; text-decoration:none; letter-spacing:.06em; font-size:0.9rem;
+    transition:transform 0.2s, box-shadow 0.2s;
+    box-shadow:0 4px 16px rgba(201,168,212,0.35);
+  }
+  .footer .cta:hover { transform:translateY(-2px); box-shadow:0 6px 22px rgba(201,168,212,0.5); }
+
+  @media (max-width:640px) {
+    .hero { padding:60px 16px 40px; }
+    .cards { grid-template-columns: repeat(2,1fr); }
+    .card { padding:16px 14px 14px; }
+    .modal-body { padding:10px 20px 28px; }
+    .modal-pose-name { font-size:1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-badge">20 天身心重塑计划</div>
+  <h1>20 个体式，一段身心旅程</h1>
+  <p class="subtitle">瑜伽 × 心理学 · 每日一式 · 每日一悟</p>
+</section>
+
+<div class="progress-wrap">
+  <div class="progress-bar">
+    <div class="progress-seg"></div><div class="progress-seg"></div><div class="progress-seg"></div><div class="progress-seg"></div>
+  </div>
+  <div class="progress-labels"><span>觉察</span><span>释放</span><span>重建</span><span>绽放</span></div>
+</div>
+
+<!-- ═══ Stage 1 ═══ -->
+<section class="stage stage--aware">
+  <div class="stage-header">
+    <div class="stage-num">Stage 1</div>
+    <div class="stage-title">觉察 · 看见身体的诚实</div>
+    <div class="stage-sub">亚健康的第一道坎是"不知道自己在累"。慢下来，听见身体。</div>
+  </div>
+  <div class="cards" id="stage1"></div>
+</section>
+
+<!-- ═══ Stage 2 ═══ -->
+<section class="stage stage--release">
+  <div class="stage-header">
+    <div class="stage-num">Stage 2</div>
+    <div class="stage-title">释放 · 放下不该你扛的</div>
+    <div class="stage-sub">女性最容易把压力存在肩颈、髋部和下背。这几式逼你松手。</div>
+  </div>
+  <div class="cards" id="stage2"></div>
+</section>
+
+<!-- ═══ Stage 3 ═══ -->
+<section class="stage stage--rebuild">
+  <div class="stage-header">
+    <div class="stage-num">Stage 3</div>
+    <div class="stage-title">重建 · 重新长出力量</div>
+    <div class="stage-sub">卸掉之后不是空了，是腾出地方长新的。感受"我能"。</div>
+  </div>
+  <div class="cards" id="stage3"></div>
+</section>
+
+<!-- ═══ Stage 4 ═══ -->
+<section class="stage stage--bloom">
+  <div class="stage-header">
+    <div class="stage-num">Stage 4</div>
+    <div class="stage-title">绽放 · 不只是回到从前</div>
+    <div class="stage-sub">重塑不是为了回去，是去一个更好的版本。看见那个自己。</div>
+  </div>
+  <div class="cards" id="stage4"></div>
+</section>
+
+<div class="footer">
+  <p>觉察 → 释放 → 重建 → 绽放</p>
+  <p style="margin-top:4px;">20 天，一段身心旅程。从今天开始。</p>
+  <p style="margin-top:16px; font-family:'Noto Serif SC',serif; font-size:0.95rem; color:#8b7fa8; font-weight:500;">可菲尔瑜伽与你同行</p>
+  <p style="margin-top:2px; font-family:'Noto Serif SC',serif; font-size:0.95rem; color:#8b7fa8; font-weight:500;">20天让我们一起重新找回生命的平静与喜悦 实现生命的绽放</p>
+  <a class="cta" href="#" onclick="openModal(0);return false;">✦ 开始 Day 1</a>
+</div>
+
+<!-- ── Modal ── -->
+<div class="modal-overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════ POSE DATA ═══════════════════
+const poses = [
+  // ── Stage 1: 觉察 (蓝紫) ──
+  { stage:'aware', day:1, name:'立住自己', sanskrit:'山式 · Tadasana',
+    insight:'双脚扎根地面——焦虑的本质是你不在当下。荣格说"你抗拒的，会持续"，而山式教你的恰恰相反：不抗拒重力，不纠正摇晃，只是站稳。站住了，心就定了。',
+    instructions:['双脚并拢或与髋同宽站立，大脚趾相触','脚掌均匀踩地，脚趾张开抓住地面','大腿微收上提，尾骨向下','肩胛骨向后向下，锁骨展开','下巴微收，头顶向上延展','自然呼吸，停留1-2分钟'],
+    benefits:'改善体态与足弓力量 · 增强专注力与身体觉察 · 缓解焦虑与漂浮感'},
+  { stage:'aware', day:2, name:'情绪的潮汐', sanskrit:'猫牛式 · Marjaryasana',
+    insight:'脊柱一节节流动，像潮水来了又走。你总想把坏情绪"解决掉"，但猫牛式不给答案——它只是让你看见：吸气时身体自然打开，呼气时身体自然收拢。情绪也一样，不需要控制，只需要被允许流经。',
+    instructions:['四足跪姿，手腕在肩下，膝盖在髋下','吸气：塌腰、抬头、尾骨上翘（牛式）','呼气：拱背、低头、尾骨卷向肚脐（猫式）','动作跟随呼吸节奏，像波浪一样流动','重复8-10轮，最后回到中立位'],
+    benefits:'释放脊柱压力 · 按摩腹部器官促进消化 · 连接呼吸与身体的流动性觉察'},
+  { stage:'aware', day:3, name:'允许脆弱', sanskrit:'婴儿式 · Balasana',
+    insight:'额头贴地，缩成最小形状。成年人最稀缺的能力是主动退场，不是硬撑。这个世界教你坚强，但身体记得你没有哭完的眼泪。学会臣服和放下，好好照顾自己的身体和心灵。',
+    instructions:['跪坐，双膝分开与髋同宽或并拢','上身前屈，额头轻触地面','双臂向前伸展，掌心朝下，完全放松','或手臂沿身体两侧向后，掌心朝上','闭眼，深长呼吸，停留1-3分钟'],
+    benefits:'深度放松背部与肩颈 · 镇静神经系统 · 引导内在回归与自我接纳'},
+  { stage:'aware', day:4, name:'松开肩上的担子', sanskrit:'穿针式 · Thread the Needle',
+    insight:'肩颈是压力的收容所——你不说，身体替你扛。手臂穿过的那一刻，不是你"在拉伸"，是身体终于有机会告诉你：你背了那么多别人的期待，该放下了。费登奎斯说过，真正的放松不是什么都不做，是知道哪里在用力。',
+    instructions:['四足跪姿，手腕在肩下，膝盖在髋下','右臂从左手下方穿过，掌心朝上','右肩和头侧轻轻贴地，髋部保持抬高','感受肩胛骨区域被温柔打开','停留8-10个呼吸，换边'],
+    benefits:'释放肩颈与上背深层紧张 · 改善圆肩驼背 · 舒缓长期伏案积累的压力'},
+  { stage:'aware', day:5, name:'倒掉脑子的水', sanskrit:'下犬式 · Adho Mukha Svanasana',
+    insight:'头低于心脏，换个角度。你以为天大的事，倒过来看也就那样。这不是鸡汤——当你真正把脑袋放到低于心脏的位置，交感和副交感神经的切换就开始发生。身体比脑子更早知道什么叫"放手"。',
+    instructions:['从四足跪姿开始，手推地将臀部推高','双手与肩同宽，双脚与髋同宽','肩膀远离耳朵，脖颈放松','如果腿后侧紧张，可微屈膝盖','保持5-8个呼吸'],
+    benefits:'伸展整个后侧链 · 增强上肢与核心力量 · 促进血液回流缓解疲劳'},
+  // ── Stage 2: 释放 (珊瑚) ──
+  { stage:'release', day:6, name:'拧出疲惫', sanskrit:'仰卧扭转 · Supta Matsyendrasana',
+    insight:'膝盖倒向一侧时，你感受到的不是肌肉的拉伸，而是一天积攒的情绪在被拧出来。身体从不撒谎——那些你假装没事的时刻，都被腰椎和髋部默默存档。转过去，就让它们流走。',
+    instructions:['仰卧，双臂向两侧平展，掌心朝下','屈膝，双脚踩地靠近臀部','双膝缓慢倒向右侧，头转向左侧','保持双肩贴地，停留5-8个呼吸','吸气回正，换边重复'],
+    benefits:'释放腰椎与髋部紧张 · 按摩腹部改善消化 · 疏通脊柱侧向活动度'},
+  { stage:'release', day:7, name:'拧成绳再解开', sanskrit:'鹰式 · Garudasana',
+    insight:'缠绕到极致，再逐一松开。紧绷不是问题——你本来就生活在一个需要你随时收紧自己的世界。问题是你忘了拧开。解开鹰式的那一刻，你感受到的不是"终于放松了"，而是"原来我可以主动选择松开"。',
+    instructions:['山式站立，微屈双膝','右大腿绕于左大腿前方，右脚勾住左小腿','左臂在上右臂在下，小臂缠绕掌心相对','保持平衡，停留5个呼吸','缓慢解开，换边'],
+    benefits:'深度拉伸肩胛与上背 · 增强平衡与专注 · 释放累积的紧张感'},
+  { stage:'release', day:8, name:'打开封存的故事', sanskrit:'鸽子式 · Eka Pada Rajakapotasana',
+    insight:'髋部被瑜伽传统称为"情绪的仓库"。鸽子式里那股深层的酸胀，往往不是肌肉的问题——是某次你没有哭出来的告别，某句你咽回去的话。彼得·莱文说创伤储存在身体里。让它流，身体记得怎么释放。',
+    instructions:['从下犬式进入，右膝向前放于右手腕后方','右小腿尽量与垫子前缘平行','左腿向后伸展，脚背贴地','上身可保持直立或前屈','保持8-10个呼吸，换边'],
+    benefits:'深度打开髋关节 · 释放埋藏的情绪记忆 · 改善久坐导致的髋部僵硬'},
+  { stage:'release', day:9, name:'骨盆说真话', sanskrit:'桥式 · Setu Bandhasana',
+    insight:'耻骨推高，胸腔打开——这个动作本质上是"把最脆弱的地方暴露出来"。安全感、创造力、女性的力量感都堵在骨盆这一带。推开的瞬间，你做的不是后弯，是信任。成年人的魅力在于学会克制和突破，不再随波逐流。',
+    instructions:['仰卧，屈膝双脚踩地，与髋同宽','双手放体侧掌心朝下，或十指交扣垫在臀下','吸气推髋向上，收紧臀肌与核心','胸腔找下巴，保持膝盖不外扩','停留5-8呼吸后缓慢卷下'],
+    benefits:'强化臀腿与核心力量 · 打开胸腔与髋屈肌 · 提升骨盆区域能量流动'},
+  { stage:'release', day:10, name:'心口那块石头', sanskrit:'鱼式 · Matsyasana',
+    insight:'胸腔打开的一瞬间，有人会想哭。那不是软弱——是委屈终于找到了物理出口。心轮的敞开从来不是"想开点"就能做到的，它需要你用身体去撬动。喉咙、胸腔、腹部一条线展开，你给了一直憋着的情绪一个出口。',
+    instructions:['仰卧，双手掌心朝下塞入臀下','吸气用手肘撑地，胸腔上提','头顶点地或悬空，喉咙前侧伸展','大腿收紧，脚背绷直','保持5-8呼吸后缓慢回正'],
+    benefits:'深度打开胸腔与喉咙 · 改善呼吸与甲状腺功能 · 释放压抑的情绪与委屈'},
+  // ── Stage 3: 重建 (暖金) ──
+  { stage:'rebuild', day:11, name:'站在自己的位置', sanskrit:'战士一式 · Virabhadrasana I',
+    insight:'前腿弓后腿蹬，双臂举起。这不是对别人宣战，是终于对自己说：我选站在这里，哪也不去。存在主义心理学讲"选择即自由"——战士一式的力量感不来自对抗，来自你做出了选择并且不逃。',
+    instructions:['山式站立，右脚向后迈一大步','前膝弯曲90°，后腿蹬直','髋部摆正朝前，双臂上举合十','尾骨下沉，胸腔上提','停留5-8呼吸后换边'],
+    benefits:'强化腿部与核心力量 · 打开髋屈肌与胸腔 · 建立自信与扎根感'},
+  { stage:'rebuild', day:12, name:'目光如炬', sanskrit:'战士二式 · Virabhadrasana II',
+    insight:'双臂水平展开，凝视前方指尖。专注力是最被低估的女性力量——在这个注意力被切碎的时代，能定住目光三分钟的人，内核已经在重建。回到当下，重新扬帆起航，做自己生命的航手。',
+    instructions:['双脚宽站，右脚转90°左脚微内扣','屈右膝至90°，膝盖对准脚踝','双臂水平展开，掌心朝下','目光看向右手指尖方向','保持5-8呼吸后换边'],
+    benefits:'强化大腿与核心力量 · 提升平衡与空间感知 · 培养专注力与决心'},
+  { stage:'rebuild', day:13, name:'飞起来的战士', sanskrit:'战士三式 · Virabhadrasana III',
+    insight:'单腿站立，身体成T字。你一定会摇晃——但摇晃不是失败，是身体在学习。维果茨基的"最近发展区"说真正的成长发生在你刚好够不到的地方。每一次摇晃和回归，都是在重写你的平衡系统。',
+    instructions:['从战士一式出发，重心前移至前腿','后腿抬起与躯干成一直线','双手前伸或放于体侧','凝视地面一个固定点保持平衡','停留5个呼吸后换边'],
+    benefits:'全面强化核心稳定力 · 提升动态平衡能力 · 建立面对不确定性的从容感'},
+  { stage:'rebuild', day:14, name:'单手的重量我接得住', sanskrit:'侧板式 · Vasisthasana',
+    insight:'单侧撑起全部体重。你习惯性地低估自己能承受的重量——女性的自我叙事里太多"我不够强"。侧板式不给辩解的空间：撑住了就是你撑住了。力量感的建立不靠说服，靠身体记忆。',
+    instructions:['从平板式开始，重心移至右手','身体转向右侧，双脚叠放','右臂垂直地面，左臂向上伸展','核心收紧，髋部推高不塌','停留3-5呼吸后换边'],
+    benefits:'强化腕、肩、核心力量 · 提升全身协调与稳定 · 激活内在独立的力量感'},
+  { stage:'rebuild', day:15, name:'核心才是底气', sanskrit:'船式 · Navasana',
+    insight:'腹肌颤抖到想放弃的那一秒，才是真正在练习的时刻。你对自己说再撑三秒——这三秒不是折磨，是你和身体之间的一次信任对话。斯多葛学派说"我们无法控制发生什么，但可以选择如何回应"。这三秒就是回应。',
+    instructions:['坐姿，屈膝双脚踩地','身体微后倾，双脚离地','小腿与地面平行，双臂前伸','想挑战可伸直双腿成V字','保持5-8呼吸'],
+    benefits:'强力激活核心肌群 · 改善消化与内脏功能 · 培养意志力与内在韧性'},
+  // ── Stage 4: 绽放 (玫粉) ──
+  { stage:'bloom', day:16, name:'把心亮成太阳', sanskrit:'骆驼式 · Ustrasana',
+    insight:'跪姿后弯，胸腔推向天空。曾经你习惯含胸、低头、缩小自己——那是保护机制。但骆驼式不给你藏：最脆弱的心脏位置完全敞开。肯·威尔伯说"真正的勇气是带着恐惧向前"。这个体式就是这句话的身体版本。',
+    instructions:['跪姿，双膝与髋同宽','双手扶下背部，手肘向后夹','吸气胸腔上提，缓慢后弯','手可扶脚跟或留在下背部（可用瑜伽砖辅助）','脖颈放松，停留3-5呼吸后缓慢回正'],
+    benefits:'深度打开胸腔与肩膀 · 拉伸整个身体前侧 · 激发勇气与自我表达'},
+  { stage:'bloom', day:17, name:'打开该打开的自己', sanskrit:'蝴蝶式 · Baddha Konasana',
+    insight:'双脚相触，膝盖像蝶翼沉向地面。不必强迫一次打开到最大——这二十天的旅程已经改变了很多。归元，回到自己。不用成为别人眼中的样子，只需要感受此刻身体真实的边界。用心感受新的自己。',
+    instructions:['坐姿，双脚脚心相对，拉近骨盆','双手握住脚踝或双脚','脊柱延展，双膝轻轻沉向地面','保持5-8个呼吸，可随呼气加深前屈','最后缓慢回正'],
+    benefits:'温和打开髋关节与腹股沟 · 刺激骨盆区域循环 · 释放久坐导致的下半身淤滞'},
+  { stage:'bloom', day:18, name:'换一个角度休息', sanskrit:'靠墙抬腿 · Viparita Karani',
+    insight:'腿靠在墙上，血液自然流回心脏。这个世界上最被低估的力量叫"什么都不做"。你不需要再证明什么，不需要再追赶什么。倒置不是逃避——是一种更高级的清醒：你终于知道什么时候该行动，什么时候该休息。',
+    instructions:['侧坐靠墙，缓慢转身抬腿上墙','臀部尽量贴近墙面，双腿伸直并拢','双臂自然放于体侧，掌心朝上','闭眼，专注深长腹式呼吸','停留3-5分钟'],
+    benefits:'促进下肢血液与淋巴回流 · 深度镇静神经系统 · 缓解久站久坐的腿部疲劳'},
+  { stage:'bloom', day:19, name:'风吹过来，我不倒', sanskrit:'树式 · Vrksasana',
+    insight:'单腿站立，双手合十。你会摇晃——但摇晃不是失败。最好的稳定从来不是纹丝不动，而是在风里依然站立。这二十天你经历的一切，已经内化成你的一部分。找回真实强大的自己，优雅地活出自己想要的模样。',
+    instructions:['山式站立，重心移至左脚','右脚掌贴于左大腿内侧或小腿（避开膝盖）','双手胸前合十或举过头顶','目光凝视前方一个固定点','允许身体摇晃，呼吸保持平稳','停留8-10呼吸后换边'],
+    benefits:'提升平衡与专注力 · 强化脚踝与腿部力量 · 培养内在稳定感与柔韧并存'},
+  { stage:'bloom', day:20, name:'回到原点，已不是原来的你', sanskrit:'莲花坐冥想 + 摊尸式',
+    insight:'起点是山式——你站在那里，还不知道接下来要面对什么。终点是这里——你坐着，然后躺下，把所有重量交给大地。二十天前你以为你要"变好"，结果你只是"回来"了。荣格说"我不是我所经历的，我是我选择成为的"。而你选择了成为你自己。',
+    instructions:['先以舒适坐姿盘坐（简易坐或莲花坐）','脊柱延展，双手放于膝上，闭眼冥想3分钟','然后缓慢躺下进入摊尸式','双腿自然分开，双臂放体侧掌心朝上','完全放松，停留5分钟','观想这段身心旅程，对自己说一声谢谢'],
+    benefits:'整合20天练习成果 · 深层冥想与全然的自我接纳 · 完成身心重塑的闭环之旅'}
+];
+
+// ── Build cards ──
+const stages = ['stage1','stage2','stage3','stage4'];
+const stageNames = ['aware','release','rebuild','bloom'];
+poses.forEach((p,i)=>{
+  const si = stageNames.indexOf(p.stage);
+  const container = document.getElementById(stages[si]);
+  const card = document.createElement('button');
+  card.className = 'card';
+  card.onclick = () => openModal(i);
+  card.innerHTML = `
+    <div class="card-accent"></div>
+    <div class="card-day">DAY ${String(p.day).padStart(2,'0')}</div>
+    <div class="card-pose-name">${p.name}</div>
+    <div class="card-sanskrit">${p.sanskrit}</div>
+    <div class="card-insight">${p.insight}</div>
+    <div class="card-hint">点击查看 →</div>`;
+  container.appendChild(card);
+});
+
+// ── Modal ──
+function openModal(i){
+  const p = poses[i];
+  const cls = `modal--${p.stage}`;
+  document.getElementById('modal').className = 'modal '+cls;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-day-badge">DAY ${String(p.day).padStart(2,'0')} · ${['觉察','释放','重建','绽放'][stageNames.indexOf(p.stage)]}</div>
+    <div class="modal-pose-name">${p.name}</div>
+    <div class="modal-sanskrit">${p.sanskrit}</div>
+    <div class="modal-svg-wrap">
+      <img src="20式瑜伽体式插画生成/pose-${String(p.day).padStart(2,'0')}.png" alt="${p.name}" style="width:100%;max-width:320px;border-radius:14px;display:block;margin:0 auto;">
+    </div>
+    <div class="modal-section">
+      <h3>动作口令</h3>
+      <ul>${p.instructions.map(s=>'<li>'+s+'</li>').join('')}</ul>
+    </div>
+    <div class="modal-section">
+      <h3>功效</h3>
+      <p>${p.benefits}</p>
+    </div>
+    <div class="modal-insight-box">
+      💭 <strong>心理洞察：</strong>${p.insight}
+    </div>`;
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
