@@ -6,7 +6,7 @@
 <title>7 天瑜伽身心重塑计划</title>
 <meta property="og:title" content="7 天瑜伽身心重塑计划">
 <meta property="og:description" content="每天 3 式 · 瑜伽 × 心理学 · 一周重塑身心">
-<meta property="og:image" content="20式瑜伽体式插画生成/pose-01.webp">
+<meta property="og:image" content="images/pose-01.webp">
 <meta property="og:type" content="website">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
@@ -302,7 +302,7 @@ function openModal(i){
     <div class="modal-pose-name">${p.name}</div>
     <div class="modal-sanskrit">${p.sanskrit}</div>
     <div class="modal-svg-wrap">
-      <img src="20式瑜伽体式插画生成/pose-${String(p.global).padStart(2,'0')}.webp" alt="${p.name}" style="width:100%;max-width:320px;border-radius:14px;display:block;margin:0 auto;opacity:0;transition:opacity .35s ease" onload="this.style.opacity='1';this.nextElementSibling.style.display='none'" onerror="this.src='20式瑜伽体式插画生成/pose-${String(p.global).padStart(2,'0')}.png'">
+      <img src="images/pose-${String(p.global).padStart(2,'0')}.webp" alt="${p.name}" style="width:100%;max-width:320px;border-radius:14px;display:block;margin:0 auto;opacity:0;transition:opacity .35s ease" onload="this.style.opacity='1';this.nextElementSibling.style.display='none'" onerror="this.src='images/pose-${String(p.global).padStart(2,'0')}.png'">
       <div class="modal-img-loader">⟳ 加载中…</div>
     </div>
     <div class="modal-section"><h3>动作口令</h3><ul>${p.instructions.map(s=>'<li>'+s+'</li>').join('')}</ul></div>
@@ -322,7 +322,7 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{
     for(let i=1;i<=21;i++){
       const img=new Image();
-      img.src=`20式瑜伽体式插画生成/pose-${String(i).padStart(2,'0')}.webp`;
+      img.src=`images/pose-${String(i).padStart(2,'0')}.webp`;
     }
   },500);
 });
