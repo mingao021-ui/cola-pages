@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可菲尔瑜伽 · 十年深耕，只为女性身心归位</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #FAF7F2;
+    color: #3D3226;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: "Noto Serif SC", "Songti SC", "SimSun", serif; }
+
+  #topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    padding: 14px 32px;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(200,149,108,0.10);
+  }
+  .nav-logo { height: 34px; width: auto; }
+  .nav-brand { font-size: 0.85rem; font-weight: 600; color: #C8956C; letter-spacing: 0.08em; }
+
+  .section {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 100px 32px;
+    position: relative; overflow: hidden;
+  }
+  .section-inner {
+    max-width: 1000px; width: 100%;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .section-inner.visible { opacity: 1; transform: translateY(0); }
+
+  /* Hero */
+  #hero {
+    background: linear-gradient(170deg, #E8D5C0 0%, #F3E8DA 30%, #FAF7F2 70%, #FAF7F2 100%);
+    text-align: center; padding-top: 120px;
+  }
+  .hero-banner {
+    display: inline-flex; align-items: center; gap: 18px;
+    margin-bottom: 40px;
+    padding: 16px 36px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    box-shadow: 0 2px 16px rgba(61,50,38,0.06);
+  }
+  .hero-banner img { height: 44px; width: auto; }
+  .hero-banner .hb-divider {
+    width: 1px; height: 28px;
+    background: rgba(200,149,108,0.3);
+  }
+  .hero-banner .hb-text {
+    font-size: 0.95rem; font-weight: 600;
+    color: #B8977E; letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  #hero .hero-tagline {
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    font-weight: 700; letter-spacing: 0.04em;
+    line-height: 1.3; margin-bottom: 14px; color: #3D3226;
+  }
+  #hero .hero-divider {
+    width: 48px; height: 2px; background: #C8956C;
+    margin: 0 auto 20px; opacity: 0.5;
+  }
+  #hero .hero-sub {
+    font-size: 1rem; color: #8B7A6B;
+    letter-spacing: 0.08em; margin-bottom: 56px;
+  }
+  #hero .hero-scroll {
+    font-size: 0.8rem; color: #B8A898;
+    letter-spacing: 0.12em;
+    animation: float 2s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  .sec-label {
+    font-size: 0.78rem; letter-spacing: 0.16em;
+    color: #C8956C; text-transform: uppercase;
+    margin-bottom: 14px; font-weight: 600;
+  }
+  .sec-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700; line-height: 1.4; margin-bottom: 40px;
+  }
+  .sec-title em { font-style: normal; color: #C8956C; }
+
+  .img-banner {
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 28px rgba(61,50,38,0.08);
+    margin-bottom: 40px;
+  }
+  .img-banner img { width: 100%; display: block; max-height: 460px; object-fit: cover; }
+
+  .img-grid { display: grid; gap: 16px; margin-top: 36px; }
+  .img-grid-2 { grid-template-columns: 1fr 1fr; }
+  .img-grid-item {
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 16px rgba(61,50,38,0.06);
+  }
+  .img-grid-item img { width: 100%; display: block; height: 280px; object-fit: cover; transition: transform 0.4s ease; }
+  .img-grid-item:hover img { transform: scale(1.03); }
+
+  .cards { display: grid; gap: 24px; }
+  .cards-2 { grid-template-columns: 1fr 1fr; }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  .card {
+    background: #FFFFFF; border-radius: 16px; padding: 36px 32px;
+    box-shadow: 0 2px 20px rgba(61,50,38,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(61,50,38,0.10); }
+  .card-icon { font-size: 1.8rem; margin-bottom: 16px; }
+  .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+  .card-desc { font-size: 0.95rem; color: #6B5E52; line-height: 1.7; }
+
+  .stat-row {
+    display: flex; gap: 56px; justify-content: center; flex-wrap: wrap; margin: 40px 0;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 2.6rem; font-weight: 700; color: #C8956C; }
+  .stat-label { font-size: 0.88rem; color: #8B7A6B; margin-top: 4px; }
+
+  .store-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-top: 36px;
+  }
+  .store-item {
+    padding: 16px 20px; background: rgba(200,149,108,0.06);
+    border-radius: 10px; border-left: 3px solid #C8956C;
+    font-size: 0.92rem; line-height: 1.6;
+  }
+  .store-item strong { display: block; margin-bottom: 2px; }
+  .store-item span { color: #8B7A6B; font-size: 0.82rem; }
+
+  .dual-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .dual-col { border-radius: 16px; padding: 40px 32px; }
+  .dual-left { background: linear-gradient(135deg, #F5EDE4, #EDE0D4); }
+  .dual-right { background: linear-gradient(135deg, #FFF8F0, #FDF0E0); border: 1px solid rgba(200,149,108,0.2); }
+  .dual-col h3 { font-size: 1.3rem; margin-bottom: 16px; }
+  .dual-col p { font-size: 0.95rem; color: #6B5E52; line-height: 1.8; }
+  .dual-tag {
+    display: inline-block; font-size: 0.75rem; padding: 4px 14px;
+    border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.06em;
+  }
+  .tag-solid { background: #C8956C; color: #fff; }
+  .tag-outline { border: 1px solid #C8956C; color: #C8956C; }
+
+  /* Price table */
+  .price-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 32px 0; }
+  .price-table th {
+    text-align: left; font-size: 0.8rem; color: #C8956C;
+    padding: 12px 16px; border-bottom: 2px solid rgba(200,149,108,0.2);
+    letter-spacing: 0.06em; font-weight: 600;
+  }
+  .price-table td {
+    font-size: 0.9rem; padding: 14px 16px;
+    border-bottom: 1px solid rgba(200,149,108,0.08); color: #5A4A3A;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr.highlight-row { background: rgba(200,149,108,0.04); }
+  .price-table .price-num { font-weight: 700; color: #3D3226; white-space: nowrap; }
+
+  .highlight-box {
+    background: rgba(200,149,108,0.06);
+    padding: 20px 24px; border-radius: 12px;
+    border-left: 3px solid #C8956C; margin: 24px 0; font-size: 0.92rem; color: #5A4A3A;
+  }
+
+  .testimonial {
+    padding: 28px 28px 28px 56px; position: relative;
+  }
+  .testimonial::before {
+    content: '"'; position: absolute; left: 18px; top: 14px;
+    font-family: "Noto Serif SC", serif; font-size: 2.8rem;
+    color: #C8956C; line-height: 1; opacity: 0.35;
+  }
+  .testimonial .t-text { font-size: 0.9rem; color: #6B5E52; line-height: 1.8; margin-bottom: 10px; }
+  .testimonial .t-author { font-size: 0.8rem; color: #B8A898; }
+
+  .timeline { margin: 24px 0; }
+  .tl-item { display: flex; gap: 16px; margin-bottom: 14px; align-items: baseline; }
+  .tl-year { font-weight: 700; color: #C8956C; font-size: 0.95rem; min-width: 100px; }
+  .tl-desc { font-size: 0.92rem; color: #5A4A3A; }
+
+  #footer {
+    background: linear-gradient(180deg, #FAF7F2 0%, #3D3226 100%);
+    color: #E8D5C0; text-align: center;
+  }
+  #footer .sec-title { color: #E8D5C0; }
+  #footer .footer-mission { font-size: 1.05rem; line-height: 1.9; margin-bottom: 40px; color: #D4C4B0; }
+  .contact-btn {
+    display: inline-block; padding: 16px 40px; background: #C8956C; color: #fff;
+    border: none; border-radius: 30px; font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .contact-btn:hover { background: #B07F5A; transform: translateY(-2px); }
+  .qr-modal {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(61,50,38,0.6); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .qr-modal.open { display: flex; }
+  .qr-card {
+    background: #fff; border-radius: 20px; padding: 40px 36px 28px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    max-width: 320px; width: 90%;
+  }
+  .qr-close {
+    margin-top: 16px; padding: 8px 28px; border: 1px solid #ddd;
+    border-radius: 20px; background: #fff; color: #8B7A6B;
+    font-size: 0.85rem; cursor: pointer; transition: background 0.2s;
+  }
+  .qr-close:hover { background: #f5f5f5; }
+
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 1001;
+    background: linear-gradient(90deg, #C8956C, #E8C49A);
+    transition: width 0.1s linear;
+  }
+
+  @media (max-width: 768px) {
+    .cards-2, .cards-3, .dual-row, .img-grid-2, .store-list { grid-template-columns: 1fr; }
+    .stat-row { gap: 28px; }
+    .section { padding: 60px 20px; }
+    .card { padding: 28px 24px; }
+    .img-grid-item img { height: 200px; }
+    #topnav { padding: 12px 20px; }
+    .nav-logo { height: 28px; }
+    .hero-banner { padding: 12px 24px; gap: 12px; }
+    .hero-banner img { height: 32px; }
+    .price-table { font-size: 0.78rem; }
+    .price-table th, .price-table td { padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress" style="width:0%"></div>
+
+<nav id="topnav">
+  <img src="logo.png" alt="可菲尔瑜伽" class="nav-logo">
+  <span class="nav-brand serif">可菲尔瑜伽</span>
+</nav>
+
+<!-- 1. Hero -->
+<section id="hero" class="section">
+  <div class="section-inner visible">
+    <div class="sec-label" style="font-size:0.8rem; margin-bottom:8px;">WUHAN · KEFEIER YOGA · EST. 2016</div>
+    <h1 class="hero-tagline serif">十年深耕<br>只为女性身心归位</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">武昌本土中高端女性身心健康直营连锁品牌</p>
+    <p class="hero-scroll">↓ 了解更多</p>
+  </div>
+</section>
+
+<!-- 2. 十年·深耕 -->
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="sec-label">01 / 关于可菲尔</div>
+    <h2 class="sec-title serif">扎根武昌，<em>十年</em>只做一件事</h2>
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-num serif">2016</div><div class="stat-label">品牌创立</div></div>
+      <div class="stat-item"><div class="stat-num serif">3</div><div class="stat-label">纯直营门店</div></div>
+      <div class="stat-item"><div class="stat-num serif">400–500㎡</div><div class="stat-label">单店面积</div></div>
+      <div class="stat-item"><div class="stat-num serif">0</div><div class="stat-label">行政处罚/经营异常</div></div>
+    </div>
+    <div class="img-banner"><img src="reception.jpg" alt="可菲尔瑜伽场馆环境"></div>
+    <div class="store-list">
+      <div class="store-item"><strong>恒大首府旗舰店</strong><span>武昌区和平大道716号恒大首府临街商铺（创始首店·2016）</span></div>
+      <div class="store-item"><strong>复地东湖国际店</strong><span>武昌区中北路复地东湖国际</span></div>
+      <div class="store-item"><strong>百瑞景店</strong><span>武昌区宝通寺路百瑞景中央生活区</span></div>
+    </div>
+    <p style="text-align:center; margin-top:20px; color:#8B7A6B; font-size:0.9rem;">全直营 · 不加盟 · 标准化运营 · 武昌内环高端社区全覆盖</p>
+  </div>
+</section>
+
+<!-- 3. 发展历程 -->
+<section id="timeline" class="section" style="background:#F5EDE4;">
+  <div class="section-inner">
+    <div class="sec-label">02 / 发展历程</div>
+    <h2 class="sec-title serif">十年四阶段，<em>每一步都算数</em></h2>
+    <div class="img-banner"><img src="group-large.jpg" alt="可菲尔瑜伽十年发展"></div>
+    <div class="timeline">
+      <div class="tl-item"><span class="tl-year">2016–2017</span><span class="tl-desc"><strong>扎根起步：</strong>开设恒大首府首店，搭建团课/小班/私教三层产品模型，沉淀首批高端社区种子会员。</span></div>
+      <div class="tl-item"><span class="tl-year">2018–2021</span><span class="tl-desc"><strong>稳健扩张：</strong>连续布局多家高端社区直营店，完善孕产、理疗专项课程体系，门店扩充至多店连锁，标准化运营成型。</span></div>
+      <div class="tl-item"><span class="tl-year">2022–2024</span><span class="tl-desc"><strong>专业升级：</strong>全线引入全套进口普拉提大器械，确立「瑜伽+普拉提+专项康复」核心主营业务，夯实专业壁垒，形成成熟稳定的单店盈利模型。</span></div>
+      <div class="tl-item"><span class="tl-year">2025 至今</span><span class="tl-desc"><strong>颠覆性升级：</strong>首创纯增值身心沙龙陪伴体系，从"形体训练馆"升级为「运动形体+应用心理学+女性成长陪伴」三维女性身心成长服务平台，开启品牌第二增长曲线。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 不止练身体 -->
+<section id="model" class="section">
+  <div class="section-inner">
+    <div class="sec-label">03 / 核心模式</div>
+    <h2 class="sec-title serif">不止练身体，<em>更治愈身心</em></h2>
+    <div class="img-banner"><img src="studio-yoga.jpg" alt="可菲尔瑜伽教室"></div>
+    <div class="dual-row" style="margin-bottom:40px;">
+      <div class="dual-col dual-left">
+        <span class="dual-tag tag-solid">盈利底盘</span>
+        <h3 class="serif">专业形体训练</h3>
+        <p>瑜伽理疗 · 普拉提大器械 · 精品小班塑形 · 孕产专项修复 · 高阶身心私教 · 企业团建减压课</p>
+        <p style="margin-top:12px; font-size:0.85rem; color:#8B7A6B;">所有主力课程100%保留专业纯粹性，不改动、不掺杂疗愈内容，教学体系成熟稳定。</p>
+      </div>
+      <div class="dual-col dual-right">
+        <span class="dual-tag tag-outline">独家壁垒</span>
+        <h3 class="serif">身心疗愈沙龙</h3>
+        <p>每周轻陪伴沙龙 · 月度主题身心雅集 · 线上情绪觉察陪伴营</p>
+        <p style="margin-top:12px; font-size:0.85rem; color:#8B7A6B;">在籍会员纯免费专属权益，不占课时、不强制参与。全城唯一「专业训练+疗愈增值」双轨体系。</p>
+      </div>
+    </div>
+    <div class="img-grid img-grid-2">
+      <div class="img-grid-item"><img src="studio-pilates.jpg" alt="普拉提大器械区"></div>
+      <div class="img-grid-item"><img src="studio-reformer.jpg" alt="普拉提核心床训练区"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 课程定价 -->
+<section id="pricing" class="section">
+  <div class="section-inner">
+    <div class="sec-label">04 / 课程体系</div>
+    <h2 class="sec-title serif">透明定价，<em>专业优于同行</em></h2>
+    <div class="highlight-box">全套课程价格透明、统一连锁标准化，无隐形消费。适配理性消费时代用户需求，整体定位「专业高于同行、定价更亲民、无套路溢价」。</div>
+    <table class="price-table">
+      <tr><th>课程类型</th><th>单次体验</th><th>会员均价</th><th>课程定位</th></tr>
+      <tr><td>常规瑜伽团课（常温/理疗）</td><td class="price-num">88–128元</td><td class="price-num">70元/节</td><td>肩颈理疗、脊柱舒缓、减脂塑形——高频刚需、性价比最高</td></tr>
+      <tr class="highlight-row"><td>精品小班塑形课（4–8人）</td><td class="price-num">158–198元</td><td class="price-num">120–130元/节</td><td>精细化教学，逐人纠正体态发力模式</td></tr>
+      <tr><td>普拉提大器械私教 ★王牌</td><td class="price-num">288–398元</td><td>—</td><td>体态归位、核心修复、精准线条雕刻</td></tr>
+      <tr class="highlight-row"><td>孕产专项私教（孕前/孕期/产后）</td><td class="price-num">298–428元</td><td>—</td><td>腹直肌修复、盆底肌养护、产后体态归位</td></tr>
+      <tr><td>高阶身心专项私教</td><td class="price-num">328–458元</td><td>—</td><td>体态矫正+情绪疏导双同步调理</td></tr>
+      <tr class="highlight-row"><td>独家身心疗愈沙龙</td><td colspan="2" style="text-align:center; font-weight:700; color:#C8956C;">在籍会员免费专属权益</td><td>每周轻陪伴沙龙、月度主题雅集、线上陪伴营</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 6. 身心疗愈沙龙详解 -->
+<section id="salon" class="section" style="background:#F5EDE4;">
+  <div class="section-inner">
+    <div class="sec-label">05 / 独家增值壁垒</div>
+    <h2 class="sec-title serif">身心疗愈沙龙，<em>同业无法复制</em></h2>
+    <div class="img-banner"><img src="lounge.jpg" alt="可菲尔会员休憩区"></div>
+    <p style="font-size:0.95rem; color:#6B5E52; margin-bottom:32px;">
+      完全脱离常规课堂，不占用课时、不强制参与、不影响专业教学。以轻量化、高质感场景服务，解决女性情绪内耗、压力紧绷、自我缺失问题。做到「专业课够专业、增值服务够治愈」，双线互补。
+    </p>
+    <div class="cards cards-3">
+      <div class="card">
+        <div class="card-icon">🌸</div>
+        <div class="card-title serif">每周轻陪伴沙龙</div>
+        <div class="card-desc">每周1次，8人内小圈层。极简舒展+情绪觉察+轻疏导，完全区别于常规专业课训练模式。为会员提供固定松弛出口。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <div class="card-title serif">月度主题身心雅集</div>
+        <div class="card-desc">户外落日松弛局、草坪正念轻野餐、音疗躺卧陪伴夜、书写情绪工坊、女性成长共读会——脱离教室场景，在自然美学中修复身心。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-title serif">线上情绪觉察陪伴营</div>
+        <div class="card-desc">区别运动打卡，主打情绪觉察。每日引导会员记录身体紧绷点、当下情绪与内心状态，实现课堂之外的长期陪伴。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. 谁在这里 -->
+<section id="audience" class="section">
+  <div class="section-inner">
+    <div class="sec-label">06 / 核心客群</div>
+    <h2 class="sec-title serif">谁在可菲尔</h2>
+    <div class="img-banner"><img src="group-outdoor.jpg" alt="可菲尔瑜伽会员户外活动"></div>
+    <div class="cards cards-2">
+      <div class="card">
+        <div class="card-icon">👩‍👧</div>
+        <div class="card-title serif">35–45岁 高净值宝妈 · 核心高价值客群</div>
+        <div class="card-desc">主力付费客群。定居武昌高端社区，消费稳定，重视长期健康。产后修复、体态归位、情绪内耗、角色焦虑——她们要的不是一节课，是一个让身心都能松弛的地方。复购率与转介绍率最高。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <div class="card-title serif">25–60岁 全龄女性 · 广谱泛服务人群</div>
+        <div class="card-desc">25–34岁职场白领：久坐体态矫正、减压塑形、告别肩颈劳损。46–60岁康养女性：劳损康复、柔韧训练、气血调理、身心舒缓。全生命周期覆盖，客群需求分层清晰。</div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:28px; color:#6B5E52; font-size:0.95rem;"><strong>对合作伙伴的价值：</strong>手握武昌高净值女性私域圈层，高粘性·高复购·高转介绍·精准触达</p>
+  </div>
+</section>
+
+<!-- 8. 她们说 -->
+<section id="testimonials" class="section" style="background:#F5EDE4;">
+  <div class="section-inner">
+    <div class="sec-label">07 / 真实口碑</div>
+    <h2 class="sec-title serif">她们这样说</h2>
+    <div class="img-banner"><img src="group-studio.jpg" alt="可菲尔瑜伽会员合影"></div>
+    <div class="cards cards-3">
+      <div class="card testimonial"><p class="t-text">开了近十年的老店，环境干净整洁，冬天教室有地暖，新风系统通风很好。老师特别负责，上肩颈理疗课每一个学员都会逐一纠正动作。坚持两个月，颈椎僵硬明显好转，性价比比周边新开的工作室高很多，已经推荐同事一起来。</p><p class="t-author">—— 上班族会员</p></div>
+      <div class="card testimonial"><p class="t-text">生完宝宝腹直肌分离三指，经常腰酸。在这里定制了普拉提私教课程，教练会循序渐进调整强度，不会急于求成。训练15节课，体态和内脏松弛问题改善非常明显，全程安心无压力，是武昌片区做产后康复很专业的场馆。</p><p class="t-author">—— 产后宝妈会员</p></div>
+      <div class="card testimonial"><p class="t-text">完全没有瑜伽基础，不用担心跟不上节奏。课堂氛围轻松，没有内卷攀比。老师耐心讲解发力点，杜绝硬掰拉伸。团课节奏适中，新手友好，体验课后直接办了年卡。</p><p class="t-author">—— 零基础新手会员</p></div>
+      <div class="card testimonial"><p class="t-text">常年伏案工作，肩颈僵硬、含胸驼背特别严重，试了武昌好几家瑜伽馆，最终锁定可菲尔。老师教学特别细致，不会流水线敷衍，每一个动作都会针对性调整。练完整个人肩颈瞬间通透，情绪和睡眠都踏实很多，是打工人长期续命的绝佳放松去处。</p><p class="t-author">—— 久坐上班族会员</p></div>
+      <div class="card testimonial"><p class="t-text">生完娃一直腰酸无力、体态垮塌，整个人状态特别差。在这里定制了产后修复私教，教练特别懂宝妈的身体状态，训练循序渐进、温柔不暴力。坚持一段时间腰酸缓解很多，腹直肌和体态肉眼可见变紧致。环境干净温馨，氛围特别治愈，很适合妈妈们调理身体找回状态。</p><p class="t-author">—— 产后修复宝妈会员</p></div>
+      <div class="card testimonial"><p class="t-text">可菲尔是武昌老牌瑜伽馆里质感超在线的一家！门店干净通透、环境安静治愈，器械维护得很到位。最打动我的是没有过度推销，全程体验感很舒服。课程专业扎实，身心小沙龙特别加分，不只是单纯练动作，更让人真正放松内心缓解内耗。</p><p class="t-author">—— 品质体验会员</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. 品牌优势 -->
+<section id="advantages" class="section">
+  <div class="section-inner">
+    <div class="sec-label">08 / 品牌优势</div>
+    <h2 class="sec-title serif">四大壁垒，<em>不可复制</em></h2>
+    <div class="cards cards-2">
+      <div class="card"><div class="card-icon">🏛</div><div class="card-title serif">十年本土口碑壁垒</div><div class="card-desc">深耕武昌高端社区，高评分、高续卡、高转介绍。全程直营不加盟，品牌品质完全可控。用户信任度极强，是武昌区域稳健型标杆瑜伽连锁。</div></div>
+      <div class="card"><div class="card-icon">🎯</div><div class="card-title serif">专业纯粹壁垒</div><div class="card-desc">主力课程不改动、不花哨，教学扎实、效果可控。从瑜伽到普拉提到孕产康复，课程体系完整闭环。全职持证教练梯队，分科专项教学，师资稳定性高。</div></div>
+      <div class="card"><div class="card-icon">💎</div><div class="card-title serif">独家体验壁垒</div><div class="card-desc">全城唯一「专业形体训练+免费身心沙龙陪伴」双轨体系，软硬结合。每周沙龙、月度雅集、线上陪伴营三大落地形态，同业无法复制。</div></div>
+      <div class="card"><div class="card-icon">👩‍🏫</div><div class="card-title serif">师资服务壁垒</div><div class="card-desc">分科专项全职教练团队，懂形体康复、更懂当代女性压力与需求。服务温度远超流水线场馆，会员续费率和满意度持续领先。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 合作 -->
+<section id="cooperation" class="section" style="background:#F5EDE4;">
+  <div class="section-inner">
+    <div class="sec-label">09 / 异业合作</div>
+    <h2 class="sec-title serif">我们一起<em>能做的事</em></h2>
+    <div class="cards cards-2">
+      <div class="card"><div class="card-icon">🤝</div><div class="card-title serif">品牌联名 & 场景共建</div><div class="card-desc">高端品牌新品驻点体验、月度联名松弛主题沙龙、户外正念轻运动IP共建。可菲尔提供3家高端社区直营场景与高净值女性私域社群，做品牌生活方式内容的线下落地。</div></div>
+      <div class="card"><div class="card-icon">🔄</div><div class="card-title serif">会员权益互通</div><div class="card-desc">双方会员双向导流：可菲尔会员享合作伙伴专属折扣与活动名额，合作伙伴会员可体验可菲尔身心沙龙、体态评估、精品团课。精准高净值人群交叉赋能。</div></div>
+      <div class="card"><div class="card-icon">🏢</div><div class="card-title serif">企业团课 & B端服务</div><div class="card-desc">为企业定制身心减压团课、正念舒展课程、女性团体成长活动。可菲尔输出专业内容，合作方输出员工福利礼包，打包落地企业级商务合作。</div></div>
+      <div class="card"><div class="card-icon">🎯</div><div class="card-title serif">精准渠道合作</div><div class="card-desc">月子中心、产后康复机构、高端母婴品牌、女性健康管理平台——可菲尔覆盖产后修复与身心疗愈全场景，是高端女性健康服务的天然流量入口与落地承接方。</div></div>
+    </div>
+    <p style="text-align:center; margin-top:32px; font-size:0.95rem; color:#8B7A6B;">已具备对接 Lululemon、Alo Yoga 等一线高端运动品牌的全套合作资质</p>
+  </div>
+</section>
+
+<!-- 11. 尾屏 -->
+<section id="footer" class="section">
+  <div class="section-inner">
+    <h2 class="sec-title serif" style="font-size:clamp(1.4rem,3vw,1.8rem); margin-bottom:32px;">不止修复体态<br>更治愈当代女性的身心内耗</h2>
+    <p class="footer-mission">让每一位女性<br>在可菲尔回归松弛、自信、完整的自我状态<br><span style="font-size:0.85rem; opacity:0.7;">—— 做武昌十年靠谱老店，做女性一生的身心成长栖息地</span></p>
+    <div style="margin-top:32px;">
+      <p style="font-size:0.9rem; color:#D4C4B0; margin-bottom:16px;">武汉可菲尔瑜珈有限公司</p>
+      <button class="contact-btn" onclick="openQR()">📱 扫码添加微信，洽谈合作</button>
+    </div>
+    <div class="qr-modal" id="qrModal" onclick="closeQR(event)">
+      <div class="qr-card" onclick="event.stopPropagation()">
+        <p style="font-size:0.95rem; color:#3D3226; margin-bottom:16px; font-weight:600;">微信扫码联系可菲尔</p>
+        <img src="qrcode.jpg" alt="微信二维码" style="width:200px; height:200px; border-radius:12px; margin:0 auto 16px; display:block;">
+        <p style="font-size:0.78rem;color:#B8A898;">长按或截图扫码</p>
+        <button class="qr-close" onclick="closeQR()">✕ 关闭</button>
+      </div>
+    </div>
+    <p style="margin-top:60px; font-size:0.78rem; color:rgba(232,213,192,0.4); letter-spacing:0.06em;">2016 – 2026 · 十年深耕 · 三店直营 · 武昌本土</p>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.section-inner').forEach(el => observer.observe(el));
+window.addEventListener('scroll', () => {
+  document.getElementById('progress').style.width = Math.min((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100,100) + '%';
+});
+document.querySelector('#hero .section-inner').classList.add('visible');
+function openQR(){ document.getElementById('qrModal').classList.add('open'); }
+function closeQR(e){ if(!e||e.target===document.getElementById('qrModal')) document.getElementById('qrModal').classList.remove('open'); }
+</script>
+</body>
+</html>
